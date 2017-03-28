@@ -2860,6 +2860,7 @@ static int uartdm_init_port(struct uart_port *uport)
 		goto exit_lh_init;
 	}
 	sched_setscheduler(rx->task, SCHED_FIFO, &param);
+
 	init_kthread_work(&rx->kwork, msm_serial_hs_rx_work);
 
 	init_kthread_worker(&tx->kworker);
@@ -2870,6 +2871,7 @@ static int uartdm_init_port(struct uart_port *uport)
 		goto exit_lh_init;
 	}
 	sched_setscheduler(tx->task, SCHED_FIFO, &param);
+
 	init_kthread_work(&tx->kwork, msm_serial_hs_tx_work);
 
 	rx->buffer = dma_alloc_coherent(uport->dev,
